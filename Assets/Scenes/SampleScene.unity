@@ -328,6 +328,7 @@ GameObject:
   m_Component:
   - component: {fileID: 800464648}
   - component: {fileID: 800464650}
+  - component: {fileID: 800464651}
   - component: {fileID: 800464649}
   m_Layer: 0
   m_Name: Player
@@ -362,11 +363,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31d2dfa0240fd874d97f9bfa1f8eb410, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PLAYER_SPEED: 17.5
   player: {fileID: 800464647}
-  mainCamera: {fileID: 519420031}
-  LEFTMOST_POSITION: {x: -10.5, y: -4.4, z: 0}
-  RIGHTMOST_POSITION: {x: -0.55, y: -4.4, z: 0}
+  playerRigidBody: {fileID: 0}
+  LEFTMOST_X_COORD: -10.5
+  RIGHTMOST_X_COORD: -0.55
 --- !u!212 &800464650
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -418,6 +418,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!50 &800464651
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800464647}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 5
+  m_LinearDrag: 10
+  m_AngularDrag: 0
+  m_GravityScale: 6
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &908018670
 GameObject:
   m_ObjectHideFlags: 0

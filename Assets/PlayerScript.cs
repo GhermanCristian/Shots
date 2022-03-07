@@ -3,34 +3,56 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour {
-    public float PLAYER_SPEED = 17.5f;
     public GameObject player;
-    public Camera mainCamera;
-    public Vector3 LEFTMOST_POSITION;
-    public Vector3 RIGHTMOST_POSITION;
+    public Rigidbody2D playerRigidBody;
+
+    public float LEFTMOST_X_COORD;
+    public float RIGHTMOST_X_COORD;
+    public const float PLAYER_HORIZONTAL_SPEED = 17.5f;
+    public const float LOWEST_Y_COORD = -4.4f;
+    public const float HIGHEST_Y_COORD = -0.5f;
+
+    void Start() {
+        playerRigidBody = GetComponent<Rigidbody2D>();
+    }
 
     void Update() {
-        float translation = Input.GetAxis("Horizontal_P1");
+        float horizontalTranslation = Input.GetAxis("Horizontal_P1");
+        float verticalTranslation = Input.GetAxis("Jump_P1");
+
         // the translation should be constant (in this case 0.33 units)
-        if (translation > 0.15f) {
-            translation = 0.33f;
+        if (horizontalTranslation > 0.15f) {
+            horizontalTranslation = 0.33f;
         }
-        else if (translation < -0.15f) {
-            translation = -0.33f;
+        else if (horizontalTranslation < -0.15f) {
+            horizontalTranslation = -0.33f;
         }
         else { // if the input is small ([-0.15, 0.15] units), the player stops
-            translation = 0.0f;
+            horizontalTranslation = 0.0f;
         }
 
-        translation *= Time.deltaTime * PLAYER_SPEED;
-        transform.Translate(translation, 0, 0);
+        // jump
+        if (verticalTranslation > 0.5f && player.transform.position.y < HIGHEST_Y_COORD) {
+            // TODO - prevent double-jumping
+            playerRigidBody.AddForce(transform.up * 3f, ForceMode2D.Impulse);
+        }
+
+        horizontalTranslation *= Time.deltaTime * PLAYER_HORIZONTAL_SPEED;
+        transform.Translate(horizontalTranslation, 0, 0);
 
         // don't allow the player to go past the screen limits
-        if (player.transform.position.x < LEFTMOST_POSITION.x) {
-            player.transform.position = LEFTMOST_POSITION;
+        if (player.transform.position.x < LEFTMOST_X_COORD) {
+            player.transform.position = new Vector3(LEFTMOST_X_COORD, player.transform.position.y, 0);
         }
-        if (player.transform.position.x > RIGHTMOST_POSITION.x) {
-            player.transform.position = RIGHTMOST_POSITION;
+        if (player.transform.position.x > RIGHTMOST_X_COORD) {
+            player.transform.position = new Vector3(RIGHTMOST_X_COORD, player.transform.position.y, 0);
+        }
+        if (player.transform.position.y < LOWEST_Y_COORD) {
+            player.transform.position = new Vector3(player.transform.position.x, LOWEST_Y_COORD, 0);
+        }
+        if (player.transform.position.y >= HIGHEST_Y_COORD) {
+            player.transform.position = new Vector3(player.transform.position.x, HIGHEST_Y_COORD, 0);
+            playerRigidBody.AddForce(transform.up * -0.7f, ForceMode2D.Impulse);
         }
     }
 }
