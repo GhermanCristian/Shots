@@ -6,8 +6,20 @@ public sealed class GameControllerScript : MonoBehaviour {
     public GameObject bottlePrefab;
 
     private void generateBottles() {
-        GameObject bottle = Instantiate(bottlePrefab);
-        bottle.transform.position = new Vector3(-2, 0, 0);
+        for (int row = 1; row <= 3; row++) {
+            int column;
+            if (row % 2 == 1) {
+                column = 1;
+            }
+            else {
+                column = 2;
+            }
+            for (; column <= 11; column += 2) {
+                GameObject bottle = Instantiate(bottlePrefab);
+                bottle.transform.position = new Vector3(-column + 0.5f, 2 * row - 1, 0);
+            }
+        }
+        
     }
 
     void Start() {
