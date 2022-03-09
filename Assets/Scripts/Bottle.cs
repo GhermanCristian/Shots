@@ -15,6 +15,8 @@ public class Bottle : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col) {
         Debug.Log("Bottle hit by " + col.name);
-        Destroy(gameObject);
+        if (col.name.Contains("Bullet")) {
+            Destroy(gameObject);
+        }
     }
 }
