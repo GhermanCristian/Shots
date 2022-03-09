@@ -12,7 +12,7 @@ public class PlayerScript : MonoBehaviour {
     public float LEFTMOST_X_COORD;
     public float RIGHTMOST_X_COORD;
     public const float PLAYER_HORIZONTAL_SPEED = 17.5f;
-    public const float LOWEST_Y_COORD = -4.4f;
+    public const float LOWEST_Y_COORD = -5.7f;
     public const float HIGHEST_Y_COORD = -0.5f;
 
     public Vector3 getPlayerPosition() {
@@ -29,6 +29,7 @@ public class PlayerScript : MonoBehaviour {
     }
 
     private void fireShot() {
+        //TODO - check why the game start by firing a bullet
         if (Input.GetAxis("Fire1_P1") != 1f || this.isBulletActive()) {
             return;
         }
