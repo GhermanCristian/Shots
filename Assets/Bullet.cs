@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour {
 
     void Update() {
         if (transform.position.y < HIGHEST_Y_COORD) {
-            transform.Translate(0, 0.03f, 0);
+            transform.Translate(0, 0.06f, 0);
         }
         else {
             Destroy(gameObject);
