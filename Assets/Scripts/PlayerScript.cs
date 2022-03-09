@@ -8,7 +8,8 @@ public class PlayerScript : MonoBehaviour {
     public GameObject bulletPrefab;
     private Bullet currentBulletClone;
     public Rigidbody2D playerRigidBody;
-    public GameControllerScript gameControllerScript;
+    public GameObject gameController;
+    private GameControllerScript gameControllerScript;
 
     public float LEFTMOST_X_COORD;
     public float RIGHTMOST_X_COORD;
@@ -26,7 +27,7 @@ public class PlayerScript : MonoBehaviour {
 
     void Start() {
         playerRigidBody = GetComponent<Rigidbody2D>();
-        gameControllerScript = GameControllerScript.getInstance();
+        gameControllerScript = gameController.GetComponent<GameControllerScript>();
     }
 
     private bool isBulletActive() {
@@ -34,7 +35,6 @@ public class PlayerScript : MonoBehaviour {
     }
 
     private void fireShot() {
-        //TODO - check why the game start by firing a bullet
         if (Input.GetAxis("Fire1_P1") != 1f || this.isBulletActive()) {
             return;
         }
@@ -46,16 +46,6 @@ public class PlayerScript : MonoBehaviour {
 
     private void moveHorizontally() {
         float horizontalTranslation = Input.GetAxisRaw("Horizontal_P1");
-        // the translation should be constant (in this case 0.33 units)
-        /*if (horizontalTranslation > 0.15f) {
-            horizontalTranslation = 0.33f;
-        }
-        else if (horizontalTranslation < -0.15f) {
-            horizontalTranslation = -0.33f;
-        }
-        else { // if the input is small ([-0.15, 0.15] units), the player stops
-            horizontalTranslation = 0.0f;
-        }*/
         horizontalTranslation *= Time.deltaTime * PLAYER_HORIZONTAL_SPEED;
         transform.Translate(horizontalTranslation, 0, 0);
 
