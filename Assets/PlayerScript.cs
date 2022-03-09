@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour {
@@ -14,6 +15,10 @@ public class PlayerScript : MonoBehaviour {
     public const float PLAYER_HORIZONTAL_SPEED = 17.5f;
     public const float LOWEST_Y_COORD = -5.7f;
     public const float HIGHEST_Y_COORD = -0.5f;
+
+    private bool isOnTheFloor() {
+        return Math.Abs(player.transform.position.y - LOWEST_Y_COORD) <= 0.2f;
+    }
 
     public Vector3 getPlayerPosition() {
         return player.transform.position;
@@ -65,9 +70,9 @@ public class PlayerScript : MonoBehaviour {
 
     private void jump() {
         float verticalTranslation = Input.GetAxis("Jump_P1");
-        if (verticalTranslation > 0.5f && player.transform.position.y < HIGHEST_Y_COORD) {
-            // TODO - prevent double-jumping
-            playerRigidBody.AddForce(transform.up * 3f, ForceMode2D.Impulse);
+        if (verticalTranslation > 0.5f && isOnTheFloor()) {
+            playerRigidBody.velocity = Vector3.zero;
+            playerRigidBody.AddForce(new Vector2(0, 200f), ForceMode2D.Impulse);
         }
 
         // prevent the player from jumping too high or falling through the floor
