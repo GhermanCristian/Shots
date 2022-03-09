@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour {
     public GameObject player;
+    public GameObject bulletPrefab;
+    private Bullet currentBulletClone;
     public Rigidbody2D playerRigidBody;
+    public GameControllerScript gameControllerScript;
 
     public float LEFTMOST_X_COORD;
     public float RIGHTMOST_X_COORD;
@@ -12,8 +15,23 @@ public class PlayerScript : MonoBehaviour {
     public const float LOWEST_Y_COORD = -4.4f;
     public const float HIGHEST_Y_COORD = -0.5f;
 
+    public Vector3 getPlayerPosition() {
+        return player.transform.position;
+    }
+
+    private bool isBulletActive() {
+        return currentBulletClone != null && currentBulletClone.isAlive == true;
+    }
+
+    private void fireShot() {
+        this.currentBulletClone = Instantiate(bulletPrefab).GetComponent<Bullet>();
+        this.currentBulletClone.player = player;
+        gameControllerScript.fireShot(this);
+    }
+
     void Start() {
         playerRigidBody = GetComponent<Rigidbody2D>();
+        gameControllerScript = GameControllerScript.getInstance();
     }
 
     void Update() {
@@ -53,6 +71,10 @@ public class PlayerScript : MonoBehaviour {
         if (player.transform.position.y >= HIGHEST_Y_COORD) {
             player.transform.position = new Vector3(player.transform.position.x, HIGHEST_Y_COORD, 0);
             playerRigidBody.AddForce(transform.up * -0.7f, ForceMode2D.Impulse);
+        }
+
+        if (Input.GetAxis("Fire1_P1") == 1f && this.isBulletActive() == false) {
+            this.fireShot();
         }
     }
 }
