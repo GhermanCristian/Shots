@@ -27,7 +27,6 @@ public class PlayerScript : MonoBehaviour {
 
     void Start() {
         playerRigidBody = GetComponent<Rigidbody2D>();
-        gameControllerScript = gameController.GetComponent<GameControllerScript>();
     }
 
     private bool isBulletActive() {
@@ -41,7 +40,6 @@ public class PlayerScript : MonoBehaviour {
 
         this.currentBulletClone = Instantiate(bulletPrefab).GetComponent<Bullet>();
         this.currentBulletClone.player = player;
-        gameControllerScript.fireShot(this);
     }
 
     private void moveHorizontally() {

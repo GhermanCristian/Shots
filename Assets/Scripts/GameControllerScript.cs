@@ -2,6 +2,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public sealed class GameControllerScript : MonoBehaviour {
     private const int ROW_COUNT = 3;
@@ -9,8 +10,10 @@ public sealed class GameControllerScript : MonoBehaviour {
     private const int LAST_ROW_INDEX = 0; // the lowest row in the game view
 
     public GameObject bottlePrefab;
+    public Text currentScorePlayer1Text;
     private GameObject[,] bottles = new GameObject[ROW_COUNT, COLUMN_COUNT];
     private int totalBottleRows;
+    private int currentScorePlayer1;
 
     private void generateInitialBottles() {
         while (this.totalBottleRows < ROW_COUNT) {
@@ -24,13 +27,17 @@ public sealed class GameControllerScript : MonoBehaviour {
 
     void Start() {
         this.totalBottleRows = 0;
+        this.currentScorePlayer1 = 0;
+        currentScorePlayer1Text.text = "Score: 0";
         generateInitialBottles();
     }
 
     private bool isLastRowDestroyed() {
         for (int column = 0; column < COLUMN_COUNT; column++) {
             if (bottles[LAST_ROW_INDEX, column] != null) {
-                return false;
+                if (bottles[LAST_ROW_INDEX, column].GetComponent<Bottle>().isAlive == false) {
+                    return false;
+                }
             }
         }
         return true;
@@ -52,6 +59,7 @@ public sealed class GameControllerScript : MonoBehaviour {
 
     private void addNewRow() {
         int column = 0;
+        System.Random rnd = new System.Random(); // add the "System" namespace to distinguish from the Unity Random class
         if (this.totalBottleRows % 2 == 1) {
             column = 1;
         }
@@ -59,6 +67,9 @@ public sealed class GameControllerScript : MonoBehaviour {
         for (; column < COLUMN_COUNT; column += 2) {
             bottles[row, column] = Instantiate(bottlePrefab);
             bottles[row, column].transform.position = this.computePositionForBottle(row, column);
+            Bottle currentBottle = bottles[row, column].GetComponent<Bottle>();
+            currentBottle.game = this;
+            currentBottle.points = rnd.Next(1, 4); // in the interval [1, 3]
         }
         this.totalBottleRows++;
     }
@@ -70,7 +81,9 @@ public sealed class GameControllerScript : MonoBehaviour {
         }
     }
 
-    public void fireShot(PlayerScript player) {
-        Invoke("attemptToShiftDownLastRows", 0.7f);
+    public void bottleWasBroken(Bottle brokenBottle) {
+        this.currentScorePlayer1 += brokenBottle.points;
+        currentScorePlayer1Text.text = string.Format("Score: {0}", this.currentScorePlayer1);
+        attemptToShiftDownLastRows();
     }
 }
