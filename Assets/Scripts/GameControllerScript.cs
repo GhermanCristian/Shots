@@ -51,7 +51,7 @@ public sealed class GameControllerScript : MonoBehaviour {
                 bottles[tempRow + 1, column] = null;
                 if (bottles[tempRow, column] != null) {
                     // because the empty positions are shifted as well, we need to ensure we don't assign them any positions
-                    bottles[tempRow, column].transform.position = this.computePositionForBottle(tempRow, column);
+                    bottles[tempRow, column].GetComponent<Bottle>().notifyStartDescending(this.computePositionForBottle(tempRow, column));
                 }
             }
         }

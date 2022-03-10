@@ -116,9 +116,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 0}
   game: {fileID: 0}
+  bottle: {fileID: 924637499413660188}
   points: 0
   isAlive: 0
   BREAKING_ANIMATION_DURATION_SECONDS: 0.5
+  DESCENDING_SPEED: 0.02
 --- !u!50 &1784286945116369180
 Rigidbody2D:
   serializedVersion: 4
