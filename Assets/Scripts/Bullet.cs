@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour {
 
     void Update() {
         if (transform.position.y < HIGHEST_Y_COORD) {
-            transform.Translate(0, 0.06f, 0);
+            transform.Translate(0, 0.03f, 0);
         }
         else {
             this.destroy();
@@ -28,7 +28,6 @@ public class Bullet : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D col) {
-        Debug.Log("Bullet has hit a " + col.name);
         this.destroy();
     }
 }
