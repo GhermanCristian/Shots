@@ -13,7 +13,7 @@ public class PlayerScript : MonoBehaviour {
 
     public float LEFTMOST_X_COORD;
     public float RIGHTMOST_X_COORD;
-    public const float PLAYER_HORIZONTAL_SPEED = 5f;
+    public const float PLAYER_HORIZONTAL_SPEED = 7f;
     public const float LOWEST_Y_COORD = -5.7f;
     public const float HIGHEST_Y_COORD = -0.5f;
 

@@ -4,24 +4,32 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public sealed class GameControllerScript : MonoBehaviour {
+    private const int ROW_COUNT = 3;
+    private const int COLUMN_COUNT = 11;
+    private const int LAST_ROW_INDEX = 0; // the lowest row in the game view
+
     public GameObject bottlePrefab;
-    private GameObject[,] bottles = new GameObject[3, 11];
+    private GameObject[,] bottles = new GameObject[ROW_COUNT, COLUMN_COUNT];
     private int totalBottleRows;
 
-    private void generateBottles() {
-        while (this.totalBottleRows < 3) {
+    private void generateInitialBottles() {
+        while (this.totalBottleRows < ROW_COUNT) {
             this.addNewRow();
         }
     }
 
+    private Vector3 computePositionForBottle(int row, int column) {
+        return new Vector3(-column - 0.5f, 2 * row + 1, 0);
+    }
+
     void Start() {
         this.totalBottleRows = 0;
-        generateBottles();
+        generateInitialBottles();
     }
 
     private bool isLastRowDestroyed() {
-        for (int column = 0; column < 11; column++) {
-            if (bottles[0, column] != null) {
+        for (int column = 0; column < COLUMN_COUNT; column++) {
+            if (bottles[LAST_ROW_INDEX, column] != null) {
                 return false;
             }
         }
@@ -31,12 +39,12 @@ public sealed class GameControllerScript : MonoBehaviour {
     private void shiftRowsDown() {
         // "down" in the view, but in the matrix it's actually a move up
         for (int tempRow = 0; tempRow < 2; tempRow++) {
-            for (int column = 0; column < 11; column++) {
+            for (int column = 0; column < COLUMN_COUNT; column++) {
                 bottles[tempRow, column] = bottles[tempRow + 1, column];
                 bottles[tempRow + 1, column] = null;
                 if (bottles[tempRow, column] != null) {
                     // because the empty positions are shifted as well, we need to ensure we don't assign them any positions
-                    bottles[tempRow, column].transform.position = new Vector3(-column - 0.5f, 2 * tempRow + 1, 0);
+                    bottles[tempRow, column].transform.position = this.computePositionForBottle(tempRow, column);
                 }
             }
         }
@@ -48,14 +56,14 @@ public sealed class GameControllerScript : MonoBehaviour {
             column = 1;
         }
         int row = Math.Min(2, this.totalBottleRows);
-        for (; column < 11; column += 2) {
+        for (; column < COLUMN_COUNT; column += 2) {
             bottles[row, column] = Instantiate(bottlePrefab);
-            bottles[row, column].transform.position = new Vector3(-column - 0.5f, 2 * row + 1, 0);
+            bottles[row, column].transform.position = this.computePositionForBottle(row, column);
         }
         this.totalBottleRows++;
     }
 
-    private void attemptToShiftRowsDown() {
+    private void attemptToShiftDownLastRows() {
         while (this.isLastRowDestroyed()) {
             this.shiftRowsDown();
             this.addNewRow();
@@ -63,6 +71,6 @@ public sealed class GameControllerScript : MonoBehaviour {
     }
 
     public void fireShot(PlayerScript player) {
-        Invoke("attemptToShiftRowsDown", 0.5f);
+        Invoke("attemptToShiftDownLastRows", 0.7f);
     }
 }
