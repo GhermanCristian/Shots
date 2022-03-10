@@ -35,7 +35,7 @@ public sealed class GameControllerScript : MonoBehaviour {
     private bool isLastRowDestroyed() {
         for (int column = 0; column < COLUMN_COUNT; column++) {
             if (bottles[LAST_ROW_INDEX, column] != null) {
-                if (bottles[LAST_ROW_INDEX, column].GetComponent<Bottle>().isAlive == false) {
+                if (bottles[LAST_ROW_INDEX, column].GetComponent<Bottle>().isAlive == true) {
                     return false;
                 }
             }

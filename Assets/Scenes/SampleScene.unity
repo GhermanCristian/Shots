@@ -456,7 +456,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 800464647}
   bulletPrefab: {fileID: 8353012189301308138, guid: 0ffe7bbd186f9a648b40bcde798e7e2c, type: 3}
-  currentBulletClone: {fileID: 0}
   playerRigidBody: {fileID: 0}
   gameController: {fileID: 1163667174}
   LEFTMOST_X_COORD: -10.5
@@ -615,7 +614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 296a4a64a1f4eff47be08b5e1b1c1045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bottlePrefab: {fileID: 3000365912538994214, guid: c7ffec77ca3ec5a4daeb323a7a997c4c, type: 3}
+  bottlePrefab: {fileID: 924637499413660188, guid: 7957115dace97024b960fb9c6e277200, type: 3}
   currentScorePlayer1Text: {fileID: 1765292742}
 --- !u!1 &1765292740
 GameObject:

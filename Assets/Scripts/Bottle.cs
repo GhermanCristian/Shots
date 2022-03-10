@@ -7,10 +7,11 @@ public class Bottle : MonoBehaviour {
     public GameControllerScript game;
     public int points;
     public bool isAlive;
+    public float BREAKING_ANIMATION_DURATION_SECONDS;
 
     void Start() {
         rigidBody = GetComponent<Rigidbody2D>();
-        this.isAlive = false;
+        this.isAlive = true;
     }
 
     void Update() {
@@ -18,14 +19,16 @@ public class Bottle : MonoBehaviour {
     }
 
     private void destroy() {
-        this.isAlive = true;
+        this.isAlive = false;
+        game.bottleWasBroken(this);
         Destroy(gameObject);
     }
 
     void OnTriggerEnter2D(Collider2D col) {
         if (col.name.Contains("Bullet")) {
-            this.destroy();
-            game.bottleWasBroken(this);
+            GetComponent<Animator>().SetBool("isAlive", false);
+            // wait before initiating the destroy process, such that the animation has an object to be done on
+            Invoke("destroy", BREAKING_ANIMATION_DURATION_SECONDS);
         }
     }
 }
