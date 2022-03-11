@@ -10,7 +10,7 @@ public class GameOver : MonoBehaviour {
     public void setup(int playerWhoDied, int scorePlayer1, int scorePlayer2) {
         gameObject.SetActive(true);
         int winnerScore, loserScore;
-        if (playerWhoDied == 1) {
+        if (playerWhoDied == 2) {
             winnerScore = scorePlayer1;
             loserScore = scorePlayer2;
         }
@@ -18,7 +18,7 @@ public class GameOver : MonoBehaviour {
             winnerScore = scorePlayer2;
             loserScore = scorePlayer1;
         }
-        scoreText.text = string.Format("Player{0} won with {1} points\nPlayer{2} died :( with {3} points", 
+        scoreText.text = string.Format("Player {0} won with {1} points\nPlayer {2} died :( with {3} points", 
                                         3 - playerWhoDied, winnerScore, playerWhoDied, loserScore);
     }
 

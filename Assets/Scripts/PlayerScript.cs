@@ -9,7 +9,6 @@ public class PlayerScript : MonoBehaviour {
     private Bullet currentBulletClone;
     public Rigidbody2D playerRigidBody;
     public GameObject gameController;
-    private GameControllerScript gameControllerScript;
 
     public float LEFTMOST_X_COORD;
     public float RIGHTMOST_X_COORD;
@@ -77,5 +76,15 @@ public class PlayerScript : MonoBehaviour {
         this.moveHorizontally();
         this.jump();
         this.fireShot();
+    }
+
+    private int getPlayerNumber() {
+        return int.Parse(player.name.Substring(player.name.Length - 1));
+    }
+
+    void OnTriggerEnter2D(Collider2D col) {
+        if (col.name.Contains("FallingBottle")) {
+            gameController.GetComponent<GameControllerScript>().playerIsDead(this.getPlayerNumber());
+        }
     }
 }

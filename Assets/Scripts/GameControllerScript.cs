@@ -13,10 +13,12 @@ public sealed class GameControllerScript : MonoBehaviour {
     public Text currentScorePlayer1Text;
     private GameObject[,] bottles = new GameObject[ROW_COUNT, COLUMN_COUNT];
     private int totalBottleRows;
+
     private int currentScorePlayer1;
+    private int currentScorePlayer2;
+    private int deadPlayer;
 
     private System.Random rnd = new System.Random(); // add the "System" namespace to distinguish from the Unity Random class
-
     public GameOver gameOverScreen;
 
     private void generateInitialBottles() {
@@ -32,6 +34,8 @@ public sealed class GameControllerScript : MonoBehaviour {
     void Start() {
         this.totalBottleRows = 0;
         this.currentScorePlayer1 = 0;
+        this.currentScorePlayer2 = 0;
+        this.deadPlayer = -1;
         currentScorePlayer1Text.text = "Score: 0";
         generateInitialBottles();
     }
@@ -88,11 +92,16 @@ public sealed class GameControllerScript : MonoBehaviour {
     public void bottleWasBroken(Bottle brokenBottle) {
         this.currentScorePlayer1 += brokenBottle.points;
         currentScorePlayer1Text.text = string.Format("Score: {0}", this.currentScorePlayer1);
-        Invoke("gameOver", 1f);
         attemptToShiftDownLastRows();
     }
 
+    public void playerIsDead(int player) {
+        this.deadPlayer = player;
+        // TODO - add an animation here
+        Invoke("gameOver", 1f);
+    }
+
     private void gameOver() {
-        gameOverScreen.setup(1, 10, 15);
+        gameOverScreen.setup(this.deadPlayer, this.currentScorePlayer1, this.currentScorePlayer2);
     }
 }
