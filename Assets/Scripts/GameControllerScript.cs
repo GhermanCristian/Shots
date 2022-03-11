@@ -23,8 +23,8 @@ public sealed class GameControllerScript : MonoBehaviour {
         this.deadPlayer = -1;
         currentScorePlayer1Text.text = "Score: 0";
         currentScorePlayer2Text.text = "Score: 0";
-        bottleControllerP1.setPositionAndGenerateInitialBottles(1);
-        bottleControllerP2.setPositionAndGenerateInitialBottles(2);
+        bottleControllerP1.setPositionAndGenerateInitialBottles(-1);
+        bottleControllerP2.setPositionAndGenerateInitialBottles(1);
     }
 
     public void bottleWasBroken(string playerName, int points) {
