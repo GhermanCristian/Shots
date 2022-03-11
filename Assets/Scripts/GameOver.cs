@@ -22,7 +22,7 @@ public class GameOver : MonoBehaviour {
                                         3 - playerWhoDied, winnerScore, playerWhoDied, loserScore);
     }
 
-    public void continueButtonAction() {
-        SceneManager.LoadScene("GameScene"); // reload the game
+    public void goBackToMainMenuAction() {
+        SceneManager.LoadScene("MainMenuScene");
     }
 }
