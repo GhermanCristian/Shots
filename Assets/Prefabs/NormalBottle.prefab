@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4653047210421790705}
+  - component: {fileID: 7739871059746394815}
   - component: {fileID: 2516377646113395541}
   - component: {fileID: 8644399053293338609}
-  - component: {fileID: 7739871059746394815}
   - component: {fileID: 1784286945116369180}
   - component: {fileID: 2699776098557580344}
   m_Layer: 0
@@ -35,6 +35,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7739871059746394815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924637499413660188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a443f61cbf511c9429f83d3aa21cab8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidBody: {fileID: 0}
+  game: {fileID: 0}
+  bottle: {fileID: 924637499413660188}
+  points: 0
+  isAlive: 0
+  BREAKING_ANIMATION_DURATION_SECONDS: 0.5
+  DESCENDING_SPEED: 0.02
 --- !u!70 &2516377646113395541
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -102,25 +121,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7739871059746394815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 924637499413660188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a443f61cbf511c9429f83d3aa21cab8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rigidBody: {fileID: 0}
-  game: {fileID: 0}
-  bottle: {fileID: 924637499413660188}
-  points: 0
-  isAlive: 0
-  BREAKING_ANIMATION_DURATION_SECONDS: 0.5
-  DESCENDING_SPEED: 0.02
 --- !u!50 &1784286945116369180
 Rigidbody2D:
   serializedVersion: 4

@@ -15,6 +15,8 @@ public sealed class GameControllerScript : MonoBehaviour {
     private int totalBottleRows;
     private int currentScorePlayer1;
 
+    private System.Random rnd = new System.Random(); // add the "System" namespace to distinguish from the Unity Random class
+
     private void generateInitialBottles() {
         while (this.totalBottleRows < ROW_COUNT) {
             this.addNewRow();
@@ -60,17 +62,16 @@ public sealed class GameControllerScript : MonoBehaviour {
 
     private void addNewRow() {
         int column = 0;
-        System.Random rnd = new System.Random(); // add the "System" namespace to distinguish from the Unity Random class
         if (this.totalBottleRows % 2 == 1) {
             column = 1;
         }
         int row = Math.Min(2, this.totalBottleRows);
         for (; column < COLUMN_COUNT; column += 2) {
-            bottles[row, column] = Instantiate(bottlePrefabs[rnd.Next(2)]);
+            bottles[row, column] = Instantiate(bottlePrefabs[this.rnd.Next(2)]);
             bottles[row, column].transform.position = this.computePositionForBottle(row, column);
             Bottle currentBottle = bottles[row, column].GetComponent<Bottle>();
             currentBottle.game = this;
-            currentBottle.points = rnd.Next(1, 4); // in the interval [1, 3]
+            currentBottle.points = this.rnd.Next(1, 4); // in the interval [1, 3]
         }
         this.totalBottleRows++;
     }

@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour {
 
     void Start() {
         rigidBody = GetComponent<Rigidbody2D>();
-        transform.position = new Vector3(player.transform.position.x, player.transform.position.y - 0.2f, 0);
+        transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 0.6f, 0);
     }
 
     private void destroy() {

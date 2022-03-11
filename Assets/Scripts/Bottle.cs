@@ -11,10 +11,10 @@ public class Bottle : MonoBehaviour {
     public float BREAKING_ANIMATION_DURATION_SECONDS;
     public float DESCENDING_SPEED;
 
-    private bool descending;
+    protected bool descending;
     private Vector3 destination;
 
-    void Start() {
+    protected virtual void Start() {
         rigidBody = GetComponent<Rigidbody2D>();
         this.isAlive = true;
         this.descending = false;
@@ -25,14 +25,14 @@ public class Bottle : MonoBehaviour {
         this.destination = destination;
     }
 
-    private IEnumerator descend() {
+    protected IEnumerator descend() {
         while (this.bottle.transform.position != this.destination) {
             this.bottle.transform.position = Vector3.MoveTowards(this.bottle.transform.position, this.destination, DESCENDING_SPEED);
             yield return null;
         }
     }
 
-    void Update() {
+    protected virtual void Update() {
         if (this.descending) {
             this.descending = false;
             StartCoroutine(this.descend());
