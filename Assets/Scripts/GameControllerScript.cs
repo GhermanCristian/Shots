@@ -9,7 +9,7 @@ public sealed class GameControllerScript : MonoBehaviour {
     private const int COLUMN_COUNT = 11;
     private const int LAST_ROW_INDEX = 0; // the lowest row in the game view
 
-    public GameObject bottlePrefab;
+    public GameObject[] bottlePrefabs;
     public Text currentScorePlayer1Text;
     private GameObject[,] bottles = new GameObject[ROW_COUNT, COLUMN_COUNT];
     private int totalBottleRows;
@@ -52,6 +52,7 @@ public sealed class GameControllerScript : MonoBehaviour {
                 if (bottles[tempRow, column] != null) {
                     // because the empty positions are shifted as well, we need to ensure we don't assign them any positions
                     bottles[tempRow, column].GetComponent<Bottle>().notifyStartDescending(this.computePositionForBottle(tempRow, column));
+                    // TODO - check the bug where if both row0 and row1 are empty, row2 becomes weird
                 }
             }
         }
@@ -65,7 +66,7 @@ public sealed class GameControllerScript : MonoBehaviour {
         }
         int row = Math.Min(2, this.totalBottleRows);
         for (; column < COLUMN_COUNT; column += 2) {
-            bottles[row, column] = Instantiate(bottlePrefab);
+            bottles[row, column] = Instantiate(bottlePrefabs[rnd.Next(2)]);
             bottles[row, column].transform.position = this.computePositionForBottle(row, column);
             Bottle currentBottle = bottles[row, column].GetComponent<Bottle>();
             currentBottle.game = this;

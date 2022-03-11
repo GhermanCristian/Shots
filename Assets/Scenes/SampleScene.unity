@@ -614,7 +614,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 296a4a64a1f4eff47be08b5e1b1c1045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bottlePrefab: {fileID: 924637499413660188, guid: 7957115dace97024b960fb9c6e277200, type: 3}
+  bottlePrefabs:
+  - {fileID: 924637499413660188, guid: 7957115dace97024b960fb9c6e277200, type: 3}
+  - {fileID: 924637499413660188, guid: 4cbc31d5079b70f4b89412a22a067f27, type: 3}
   currentScorePlayer1Text: {fileID: 1765292742}
 --- !u!1 &1765292740
 GameObject:
