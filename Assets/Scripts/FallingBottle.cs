@@ -11,6 +11,9 @@ public class FallingBottle : Bottle {
     }
 
     protected override void Update() {
+        if (this.isFalling) {
+            base.descending = false;
+        }
         base.Update();
         if (this.isFalling) {
             if (base.bottle.transform.position.y > -5.7f) {
