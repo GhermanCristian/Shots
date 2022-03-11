@@ -25,12 +25,13 @@ public class FallingBottle : Bottle {
 
     private void markAsBroken() {
         base.isAlive = false;
-        base.game.bottleWasBroken(this);
+        base.game.bottleWasBroken(base.playerWhoBrokeIt, base.points);
         this.isFalling = true;
     }
 
     void OnTriggerEnter2D(Collider2D col) {
         if (col.name.Contains("Bullet")) {
+            base.playerWhoBrokeIt = col.gameObject.GetComponent<Bullet>().getPlayerName();
             this.markAsBroken();
         }
         else if (col.name.Contains("Player")) {

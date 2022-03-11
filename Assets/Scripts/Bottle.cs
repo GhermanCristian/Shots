@@ -14,6 +14,8 @@ public class Bottle : MonoBehaviour {
     protected bool descending;
     private Vector3 destination;
 
+    protected string playerWhoBrokeIt;
+
     protected virtual void Start() {
         rigidBody = GetComponent<Rigidbody2D>();
         this.isAlive = true;
@@ -41,12 +43,13 @@ public class Bottle : MonoBehaviour {
 
     private void destroy() {
         this.isAlive = false;
-        game.bottleWasBroken(this);
+        game.bottleWasBroken(this.playerWhoBrokeIt, this.points);
         Destroy(gameObject);
     }
 
     void OnTriggerEnter2D(Collider2D col) {
         if (col.name.Contains("Bullet")) {
+            this.playerWhoBrokeIt = col.gameObject.GetComponent<Bullet>().getPlayerName();
             GetComponent<Animator>().SetBool("isAlive", false);
             // wait before initiating the destroy process, such that the animation has an object to be done on
             Invoke("destroy", BREAKING_ANIMATION_DURATION_SECONDS);

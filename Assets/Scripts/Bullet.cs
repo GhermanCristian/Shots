@@ -18,6 +18,10 @@ public class Bullet : MonoBehaviour {
         this.isAlive = false;
     }
 
+    public string getPlayerName() {
+        return this.player.name;
+    }
+
     void Update() {
         if (transform.position.y < HIGHEST_Y_COORD) {
             transform.Translate(0, 0.03f, 0);
@@ -28,6 +32,8 @@ public class Bullet : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D col) {
-        this.destroy();
+        if (col.name.Contains("Bottle")) {
+            this.destroy();
+        }
     }
 }
