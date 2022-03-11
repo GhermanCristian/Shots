@@ -1041,10 +1041,11 @@ MonoBehaviour:
   player: {fileID: 800464647}
   bulletPrefab: {fileID: 8353012189301308138, guid: 0ffe7bbd186f9a648b40bcde798e7e2c, type: 3}
   playerRigidBody: {fileID: 0}
-  gameController: {fileID: 1163667174}
+  game: {fileID: 1163667174}
   LEFTMOST_X_COORD: -10.5
   RIGHTMOST_X_COORD: -0.55
   PRIMARY_FIRE_INPUT_NAME: Fire1_P1
+  SECONDARY_FIRE_INPUT_NAME: Fire2_P1
   HORIZONTAL_MOVEMENT_INPUT_NAME: Horizontal_P1
   JUMP_INPUT_NAME: Jump_P1
 --- !u!212 &800464650
@@ -1385,6 +1386,9 @@ MonoBehaviour:
   gameOverScreen: {fileID: 512609554}
   bottleControllerP1: {fileID: 1011143298}
   bottleControllerP2: {fileID: 210251551}
+  isBomb1Alive: 0
+  isBomb2Alive: 0
+  bombPrefab: {fileID: 6423283975795499591, guid: c113f82242e3e944cb47dc33a7c5591b, type: 3}
 --- !u!1 &1444015264
 GameObject:
   m_ObjectHideFlags: 0
@@ -1722,10 +1726,11 @@ MonoBehaviour:
   player: {fileID: 1932308404}
   bulletPrefab: {fileID: 8353012189301308138, guid: 0ffe7bbd186f9a648b40bcde798e7e2c, type: 3}
   playerRigidBody: {fileID: 0}
-  gameController: {fileID: 1163667174}
+  game: {fileID: 1163667174}
   LEFTMOST_X_COORD: 0.55
   RIGHTMOST_X_COORD: 10.5
   PRIMARY_FIRE_INPUT_NAME: Fire1_P2
+  SECONDARY_FIRE_INPUT_NAME: Fire2_P2
   HORIZONTAL_MOVEMENT_INPUT_NAME: Horizontal_P2
   JUMP_INPUT_NAME: Jump_P2
 --- !u!50 &1932308408

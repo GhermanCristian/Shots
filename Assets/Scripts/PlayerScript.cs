@@ -8,7 +8,9 @@ public class PlayerScript : MonoBehaviour {
     public GameObject bulletPrefab;
     private Bullet currentBulletClone;
     public Rigidbody2D playerRigidBody;
-    public GameObject gameController;
+    public GameObject game;
+    public GameControllerScript gameController;
+    private int playerNumber;
 
     public float LEFTMOST_X_COORD;
     public float RIGHTMOST_X_COORD;
@@ -16,6 +18,7 @@ public class PlayerScript : MonoBehaviour {
     public const float LOWEST_Y_COORD = -5.7f;
     public const float HIGHEST_Y_COORD = -0.5f;
     public string PRIMARY_FIRE_INPUT_NAME;
+    public string SECONDARY_FIRE_INPUT_NAME;
     public string HORIZONTAL_MOVEMENT_INPUT_NAME;
     public string JUMP_INPUT_NAME;
 
@@ -29,6 +32,8 @@ public class PlayerScript : MonoBehaviour {
 
     void Start() {
         playerRigidBody = GetComponent<Rigidbody2D>();
+        gameController = game.GetComponent<GameControllerScript>();
+        this.playerNumber = this.getPlayerNumber();
     }
 
     private bool isBulletActive() {
@@ -42,6 +47,13 @@ public class PlayerScript : MonoBehaviour {
 
         this.currentBulletClone = Instantiate(bulletPrefab).GetComponent<Bullet>();
         this.currentBulletClone.player = player;
+    }
+
+    private void fireBomb() {
+        if (Input.GetAxis(SECONDARY_FIRE_INPUT_NAME) != 1f) {
+            return;
+        }
+        gameController.attemptToFireBomb(this.playerNumber);
     }
 
     private void moveHorizontally() {
@@ -79,6 +91,7 @@ public class PlayerScript : MonoBehaviour {
         this.moveHorizontally();
         this.jump();
         this.fireShot();
+        this.fireBomb();
     }
 
     private int getPlayerNumber() {
@@ -87,7 +100,7 @@ public class PlayerScript : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col) {
         if (col.name.Contains("FallingBottle")) {
-            gameController.GetComponent<GameControllerScript>().playerIsDead(this.getPlayerNumber());
+            gameController.playerIsDead(this.getPlayerNumber());
         }
     }
 }

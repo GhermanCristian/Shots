@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour {
     public GameObject player;
     public Rigidbody2D rigidBody;
     public bool isAlive = true;
-    private float HIGHEST_Y_COORD = 6f;
+    private const float HIGHEST_Y_COORD = 6f;
 
     void Start() {
         rigidBody = GetComponent<Rigidbody2D>();
