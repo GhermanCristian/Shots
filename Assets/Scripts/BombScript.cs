@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class BombScript : MonoBehaviour {
     public Rigidbody2D rigidBody;
-
     public GameControllerScript game;
     public int playerWhoFiredIt;
-    public const float LOWEST_Y_COORD = -5.7f;
 
     void Start() {
         rigidBody = GetComponent<Rigidbody2D>();
@@ -19,8 +17,8 @@ public class BombScript : MonoBehaviour {
     }
 
     void Update() {
-        if (transform.position.y > LOWEST_Y_COORD) {
-            transform.Translate(0, -0.03f, 0);
+        if (transform.position.y > Constants.LOWEST_Y_COORD) {
+            transform.Translate(0, -Constants.BOMB_SPEED, 0);
         }
         else {
             this.destroy(false);

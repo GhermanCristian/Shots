@@ -4,100 +4,74 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public sealed class GameControllerScript : MonoBehaviour {
-    public Text currentScorePlayer1Text;
-    public Text currentScorePlayer2Text;
-
-    private int currentScorePlayer1;
-    private int currentScorePlayer2;
-    private int deadPlayer;
-
+    public Text[] currentScoreText;
     public GameObject[] bottlePrefabs;
+    public BottleController[] bottleControllers;
+    public GameObject bombPrefab;
     public GameOver gameOverScreen;
 
-    public BottleController bottleControllerP1;
-    public BottleController bottleControllerP2;
-
-    public bool isBomb1Alive;
-    public bool isBomb2Alive;
-    private const int BOMB_COST = 12;
-    public GameObject bombPrefab;
-
+    private int[] currentScore = { 0, 0 };
+    private int deadPlayerIndex;    
+    public bool[] isBombAlive = { false, false };
     private System.Random rnd = new System.Random();
 
     void Start() {
-        this.currentScorePlayer1 = 0;
-        this.currentScorePlayer2 = 0;
-        this.isBomb1Alive = false;
-        this.isBomb2Alive = false;
-        this.deadPlayer = -1;
-        currentScorePlayer1Text.text = "Score: 0";
-        currentScorePlayer2Text.text = "Score: 0";
-        bottleControllerP1.setPositionAndGenerateInitialBottles(-1);
-        bottleControllerP2.setPositionAndGenerateInitialBottles(1);
+        currentScoreText[Constants.PLAYER_1_INDEX].text = Constants.DEFAULT_SCORE_TEXT;
+        currentScoreText[Constants.PLAYER_2_INDEX].text = Constants.DEFAULT_SCORE_TEXT;
+        bottleControllers[Constants.PLAYER_1_INDEX].setPositionAndGenerateInitialBottles(Constants.PLAYER_1_POSITION);
+        bottleControllers[Constants.PLAYER_2_INDEX].setPositionAndGenerateInitialBottles(Constants.PLAYER_2_POSITION);
     }
 
-    private void modifyPoints(ref int playerPoints, Text playerScoreText, int pointDifference) {
-        playerPoints += pointDifference;
-        playerScoreText.text = string.Format("Score: {0}", playerPoints);
+    private int getOtherPlayerIndex(int thisPlayerIndex) {
+        return (Constants.PLAYER_1_INDEX + Constants.PLAYER_2_INDEX) - thisPlayerIndex;
+    }
+
+    private void modifyPoints(int playerIndex, int pointDifference) {
+        this.currentScore[playerIndex] += pointDifference;
+        currentScoreText[playerIndex].text = string.Format("Score: {0}", this.currentScore[playerIndex]);
     }
 
     public void bottleWasBroken(string playerName, int points) {
-        if (playerName.EndsWith("1")) {
-            this.modifyPoints(ref this.currentScorePlayer1, currentScorePlayer1Text, points);
-            this.bottleControllerP1.attemptToShiftDownLastRows();
-        }
-        else {
-            this.modifyPoints(ref this.currentScorePlayer2, currentScorePlayer2Text, points);
-            this.bottleControllerP2.attemptToShiftDownLastRows();
-        }
+        int playerIndex = Utils.getPlayerIndexFromName(playerName);
+        this.modifyPoints(playerIndex, points);
+        this.bottleControllers[playerIndex].attemptToShiftDownLastRows();
     }
 
-    public void playerIsDead(int player) {
-        this.deadPlayer = player;
+    public void playerIsDead(int playerIndex) {
+        this.deadPlayerIndex = playerIndex;
         // TODO - add an animation here
         Invoke("gameOver", 1f);
     }
 
-    public void setBombInactive(int playerNumber, bool didKill) {
-        if (playerNumber == 1) {
-            this.isBomb1Alive = false;
-            if (didKill) {
-                playerIsDead(2);
-            }
-        }
-        else {
-            this.isBomb2Alive = false;
-            if (didKill) {
-                playerIsDead(1);
-            }
+    public void setBombInactive(int playerIndex, bool didKill) {
+        this.isBombAlive[playerIndex] = false;
+        if (didKill) {
+            this.playerIsDead(this.getOtherPlayerIndex(playerIndex));
         }
     }
 
-    public void attemptToFireBomb(int playerNumber) {
-        if (playerNumber == 1) {
-            if (this.isBomb1Alive || this.currentScorePlayer1 < BOMB_COST) {
-                return;
-            }
-            this.isBomb1Alive = true;
-            this.modifyPoints(ref this.currentScorePlayer1, currentScorePlayer1Text, -BOMB_COST);
-            BombScript bomb = Instantiate(bombPrefab, new Vector3(rnd.Next(1, 11), 6, 0), transform.rotation).GetComponent<BombScript>();
-            bomb.game = this;
-            bomb.playerWhoFiredIt = 1;
-        } 
-        else {
-            if (this.isBomb2Alive || this.currentScorePlayer2 < BOMB_COST) {
-                return;
-            }
-            this.isBomb2Alive = true;
-            this.modifyPoints(ref this.currentScorePlayer2, currentScorePlayer2Text, -BOMB_COST);
-            BombScript bomb = Instantiate(bombPrefab, new Vector3(rnd.Next(-11, -1), 6, 0), transform.rotation).GetComponent<BombScript>();
-            bomb.game = this;
-            bomb.playerWhoFiredIt = 2;
+    public void attemptToFireBomb(int playerIndex) {
+        if (this.isBombAlive[playerIndex] || this.currentScore[playerIndex] < Constants.BOMB_COST) {
+            return;
         }
-        Debug.Log("player " + playerNumber + " fired a bomb");
+        int LEFTMOST_X_COORD, RIGHTMOST_X_COORD;
+        if (playerIndex == Constants.PLAYER_1_INDEX) {
+            LEFTMOST_X_COORD = 1;
+            RIGHTMOST_X_COORD = 11;
+        }
+        else {
+            LEFTMOST_X_COORD = -11;
+            RIGHTMOST_X_COORD = -1;
+        }
+
+        this.isBombAlive[playerIndex] = true;
+        this.modifyPoints(playerIndex, -Constants.BOMB_COST);
+        BombScript bomb = Instantiate(bombPrefab, new Vector3(rnd.Next(LEFTMOST_X_COORD, RIGHTMOST_X_COORD), Constants.HIGHEST_Y_COORD, 0), transform.rotation).GetComponent<BombScript>();
+        bomb.game = this;
+        bomb.playerWhoFiredIt = playerIndex;
     }
 
     private void gameOver() {
-        gameOverScreen.setup(this.deadPlayer, this.currentScorePlayer1, this.currentScorePlayer2);
+        gameOverScreen.setup(this.deadPlayerIndex, this.currentScore);
     }
 }

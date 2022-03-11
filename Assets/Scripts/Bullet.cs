@@ -6,7 +6,6 @@ public class Bullet : MonoBehaviour {
     public GameObject player;
     public Rigidbody2D rigidBody;
     public bool isAlive = true;
-    private const float HIGHEST_Y_COORD = 6f;
 
     void Start() {
         rigidBody = GetComponent<Rigidbody2D>();
@@ -23,8 +22,8 @@ public class Bullet : MonoBehaviour {
     }
 
     void Update() {
-        if (transform.position.y < HIGHEST_Y_COORD) {
-            transform.Translate(0, 0.05f, 0);
+        if (transform.position.y < Constants.HIGHEST_Y_COORD) {
+            transform.Translate(0, Constants.BULLET_SPEED, 0);
         }
         else {
             this.destroy();

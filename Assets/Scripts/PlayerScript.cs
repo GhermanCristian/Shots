@@ -95,7 +95,7 @@ public class PlayerScript : MonoBehaviour {
     }
 
     private int getPlayerNumber() {
-        return int.Parse(player.name.Substring(player.name.Length - 1));
+        return int.Parse(player.name.Substring(player.name.Length - 1)) - 1;
     }
 
     void OnTriggerEnter2D(Collider2D col) {

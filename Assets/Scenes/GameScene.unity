@@ -315,8 +315,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0015258789, y: 0.0015106201}
-  m_SizeDelta: {x: 199.26, y: 32.54}
+  m_AnchoredPosition: {x: 0.0015258789, y: 0.0014953613}
+  m_SizeDelta: {x: 228.88, y: 32.54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &166727935
 MonoBehaviour:
@@ -351,9 +351,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Player 1 won with 99 points
+  m_Text: 'Player 1 survived with 999 points
 
-    Player 2 died :( with 00 points'
+    Player 2 died :( with 000 points'
 --- !u!222 &166727936
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1042,6 +1042,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 8353012189301308138, guid: 0ffe7bbd186f9a648b40bcde798e7e2c, type: 3}
   playerRigidBody: {fileID: 0}
   game: {fileID: 1163667174}
+  gameController: {fileID: 0}
   LEFTMOST_X_COORD: -10.5
   RIGHTMOST_X_COORD: -0.55
   PRIMARY_FIRE_INPUT_NAME: Fire1_P1
@@ -1378,16 +1379,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 296a4a64a1f4eff47be08b5e1b1c1045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentScorePlayer1Text: {fileID: 1765292742}
-  currentScorePlayer2Text: {fileID: 1809476316}
+  currentScoreText:
+  - {fileID: 1765292742}
+  - {fileID: 1809476316}
   bottlePrefabs:
   - {fileID: 924637499413660188, guid: 7957115dace97024b960fb9c6e277200, type: 3}
   - {fileID: 924637499413660188, guid: 4cbc31d5079b70f4b89412a22a067f27, type: 3}
   gameOverScreen: {fileID: 512609554}
-  bottleControllerP1: {fileID: 1011143298}
-  bottleControllerP2: {fileID: 210251551}
-  isBomb1Alive: 0
-  isBomb2Alive: 0
+  bottleControllers:
+  - {fileID: 1011143298}
+  - {fileID: 210251551}
+  isBombAlive: 0000
   bombPrefab: {fileID: 6423283975795499591, guid: c113f82242e3e944cb47dc33a7c5591b, type: 3}
 --- !u!1 &1444015264
 GameObject:
@@ -1727,6 +1729,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 8353012189301308138, guid: 0ffe7bbd186f9a648b40bcde798e7e2c, type: 3}
   playerRigidBody: {fileID: 0}
   game: {fileID: 1163667174}
+  gameController: {fileID: 0}
   LEFTMOST_X_COORD: 0.55
   RIGHTMOST_X_COORD: 10.5
   PRIMARY_FIRE_INPUT_NAME: Fire1_P2

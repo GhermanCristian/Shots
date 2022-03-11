@@ -16,8 +16,8 @@ public class FallingBottle : Bottle {
         }
         base.Update();
         if (this.isFalling) {
-            if (base.bottle.transform.position.y > -5.7f) {
-                base.bottle.transform.Translate(0, -0.01f * base.points, 0);
+            if (base.bottle.transform.position.y > Constants.LOWEST_Y_COORD) {
+                base.bottle.transform.Translate(0, -Constants.FALLING_BOTTLE_SPEED_MULTIPLIER * base.points, 0);
             }
             else {
                 this.isFalling = false;
