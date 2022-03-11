@@ -9,6 +9,8 @@ public class BottleController : MonoBehaviour {
     private const int LAST_ROW_INDEX = 0; // the lowest row in the game view
 
     private GameObject[,] bottles;
+    private const int NORMAL_BOTTLE_INDEX = 0;
+    private const int FALLING_BOTTLE_INDEX = 1;
     private int totalBottleRows;
 
     public GameObject gameController;
@@ -74,11 +76,20 @@ public class BottleController : MonoBehaviour {
         }
         int row = Math.Min(2, this.totalBottleRows);
         for (; column < COLUMN_COUNT; column += 2) {
-            bottles[row, column] = Instantiate(bottlePrefabs[this.rnd.Next(2)]);
+            int points;
+            if (this.rnd.Next(10) < 7) {
+                bottles[row, column] = Instantiate(bottlePrefabs[NORMAL_BOTTLE_INDEX]);
+                points = 1;
+            }
+            else {
+                bottles[row, column] = Instantiate(bottlePrefabs[FALLING_BOTTLE_INDEX]);
+                points = this.rnd.Next(1, 4) + this.totalBottleRows / 2;
+            }
+            
             bottles[row, column].transform.position = this.computePositionForBottle(row, column);
             Bottle currentBottle = bottles[row, column].GetComponent<Bottle>();
             currentBottle.game = this.game;
-            currentBottle.points = this.rnd.Next(1, 4); // in the interval [1, 3]
+            currentBottle.points = points;
         }
         this.totalBottleRows++;
     }
