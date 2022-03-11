@@ -17,6 +17,8 @@ public sealed class GameControllerScript : MonoBehaviour {
 
     private System.Random rnd = new System.Random(); // add the "System" namespace to distinguish from the Unity Random class
 
+    public GameOver gameOverScreen;
+
     private void generateInitialBottles() {
         while (this.totalBottleRows < ROW_COUNT) {
             this.addNewRow();
@@ -86,6 +88,11 @@ public sealed class GameControllerScript : MonoBehaviour {
     public void bottleWasBroken(Bottle brokenBottle) {
         this.currentScorePlayer1 += brokenBottle.points;
         currentScorePlayer1Text.text = string.Format("Score: {0}", this.currentScorePlayer1);
+        Invoke("gameOver", 1f);
         attemptToShiftDownLastRows();
+    }
+
+    private void gameOver() {
+        gameOverScreen.setup(1, 10, 15);
     }
 }
