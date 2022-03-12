@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4117221100093087475}
   - component: {fileID: -3686973806660251430}
-  - component: {fileID: 4565729436089434894}
   - component: {fileID: 8806275965324790197}
+  - component: {fileID: 2414510401969794994}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: Untagged
@@ -73,33 +73,17 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: 2211183c768d2dc4c9eae6bcf52ab50f, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: -9095717837082945937, guid: 9f40e029bbedd1a4f82e2043b4ed4498, type: 3}
+  m_Color: {r: 0.055891763, g: 0.18867922, b: 0.08201388, a: 0.6117647}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 1.015625}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &4565729436089434894
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6423283975795499591}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!114 &8806275965324790197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,3 +99,19 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   game: {fileID: 0}
   playerWhoFiredIt: 0
+--- !u!70 &2414510401969794994
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6423283975795499591}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.004720092}
+  m_Size: {x: 1, y: 1.983388}
+  m_Direction: 0
