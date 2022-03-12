@@ -22,10 +22,6 @@ public sealed class GameControllerScript : MonoBehaviour {
         bottleControllers[Constants.PLAYER_2_INDEX].setPositionAndGenerateInitialBottles(Constants.PLAYER_2_POSITION);
     }
 
-    private int getOtherPlayerIndex(int thisPlayerIndex) {
-        return (Constants.PLAYER_1_INDEX + Constants.PLAYER_2_INDEX) - thisPlayerIndex;
-    }
-
     private void modifyPoints(int playerIndex, int pointDifference) {
         this.currentScore[playerIndex] += pointDifference;
         currentScoreText[playerIndex].text = string.Format("Score: {0}", this.currentScore[playerIndex]);
@@ -46,7 +42,7 @@ public sealed class GameControllerScript : MonoBehaviour {
     public void setBombInactive(int playerIndex, bool didKill) {
         this.isBombAlive[playerIndex] = false;
         if (didKill) {
-            this.playerIsDead(this.getOtherPlayerIndex(playerIndex));
+            this.playerIsDead(Utils.getOtherPlayerIndex(playerIndex));
         }
     }
 

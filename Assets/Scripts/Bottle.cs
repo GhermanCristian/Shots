@@ -50,7 +50,7 @@ public class Bottle : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D col) {
         if (col.name.Contains("Bullet")) {
             this.playerWhoBrokeIt = col.gameObject.GetComponent<Bullet>().getPlayerName();
-            GetComponent<Animator>().SetBool("isAlive", false);
+            GetComponent<Animator>().SetBool(Constants.DESTROYED_BOTTLE_ANIMATION_KEY, false);
             // wait before initiating the destroy process, such that the animation has an object to be done on
             Invoke("destroy", BREAKING_ANIMATION_DURATION_SECONDS);
         }

@@ -9,4 +9,12 @@ public static class Utils {
         }
         return Constants.PLAYER_2_INDEX;
     }
+
+    public static int getOtherPlayerIndex(int thisPlayerIndex) {
+        return (Constants.PLAYER_1_INDEX + Constants.PLAYER_2_INDEX) - thisPlayerIndex;
+    }
+
+    public static int getPlayerNumberFromIndex(int playerIndex) {
+        return playerIndex + 1;
+    }
 }

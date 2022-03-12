@@ -4,13 +4,7 @@ using UnityEngine;
 using System;
 
 public class BottleController : MonoBehaviour {
-    private const int ROW_COUNT = 3;
-    private const int COLUMN_COUNT = 11;
-    private const int LAST_ROW_INDEX = 0; // the lowest row in the game view
-
     private GameObject[,] bottles;
-    private const int NORMAL_BOTTLE_INDEX = 0;
-    private const int FALLING_BOTTLE_INDEX = 1;
     private int totalBottleRows;
 
     public GameObject gameController;
@@ -18,11 +12,11 @@ public class BottleController : MonoBehaviour {
     private GameObject[] bottlePrefabs;
     private System.Random rnd; // add the "System" namespace to distinguish from the Unity Random class
 
-    private int position = 1;
+    private int position;
 
     void Start() {
         this.rnd = new System.Random(Guid.NewGuid().GetHashCode());
-        this.bottles = new GameObject[ROW_COUNT, COLUMN_COUNT];
+        this.bottles = new GameObject[Constants.ROW_COUNT, Constants.COLUMN_COUNT];
         this.game = gameController.GetComponent<GameControllerScript>();
         this.bottlePrefabs = game.bottlePrefabs;
         this.totalBottleRows = 0;
@@ -34,7 +28,7 @@ public class BottleController : MonoBehaviour {
     }
 
     private void generateInitialBottles() {
-        while (this.totalBottleRows < ROW_COUNT) {
+        while (this.totalBottleRows < Constants.ROW_COUNT) {
             this.addNewRow();
         }
     }
@@ -44,9 +38,9 @@ public class BottleController : MonoBehaviour {
     }
 
     private bool isLastRowDestroyed() {
-        for (int column = 0; column < COLUMN_COUNT; column++) {
-            if (bottles[LAST_ROW_INDEX, column] != null) {
-                if (bottles[LAST_ROW_INDEX, column].GetComponent<Bottle>().isAlive == true) {
+        for (int column = 0; column < Constants.COLUMN_COUNT; column++) {
+            if (bottles[Constants.LAST_ROW_INDEX, column] != null) {
+                if (bottles[Constants.LAST_ROW_INDEX, column].GetComponent<Bottle>().isAlive == true) {
                     return false;
                 }
             }
@@ -56,8 +50,8 @@ public class BottleController : MonoBehaviour {
 
     private void shiftRowsDown() {
         // "down" in the view, but in the matrix it's actually a move up
-        for (int tempRow = 0; tempRow < 2; tempRow++) {
-            for (int column = 0; column < COLUMN_COUNT; column++) {
+        for (int tempRow = 0; tempRow < Constants.ROW_COUNT - 1; tempRow++) {
+            for (int column = 0; column < Constants.COLUMN_COUNT; column++) {
                 bottles[tempRow, column] = bottles[tempRow + 1, column];
                 bottles[tempRow + 1, column] = null;
                 if (bottles[tempRow, column] != null) {
@@ -74,15 +68,15 @@ public class BottleController : MonoBehaviour {
         if (this.totalBottleRows % 2 == 1) {
             column = 1;
         }
-        int row = Math.Min(2, this.totalBottleRows);
-        for (; column < COLUMN_COUNT; column += 2) {
+        int row = Math.Min(Constants.ROW_COUNT - 1, this.totalBottleRows);
+        for (; column < Constants.COLUMN_COUNT; column += 2) {
             int points;
             if (this.rnd.Next(10) < 7) {
-                bottles[row, column] = Instantiate(bottlePrefabs[NORMAL_BOTTLE_INDEX]);
+                bottles[row, column] = Instantiate(bottlePrefabs[Constants.NORMAL_BOTTLE_PREFAB_INDEX]);
                 points = 1;
             }
             else {
-                bottles[row, column] = Instantiate(bottlePrefabs[FALLING_BOTTLE_INDEX]);
+                bottles[row, column] = Instantiate(bottlePrefabs[Constants.FALLING_BOTTLE_PREFAB_INDEX]);
                 points = this.rnd.Next(1, 4) + this.totalBottleRows / 2;
             }
             

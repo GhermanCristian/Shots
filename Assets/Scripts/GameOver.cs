@@ -9,13 +9,14 @@ public class GameOver : MonoBehaviour {
 
     public void setup(int playerWhoDiedIndex, int[] scores) {
         gameObject.SetActive(true);
-        int winnerScore = scores[1 - playerWhoDiedIndex];
+        int winnerPlayerIndex = Utils.getOtherPlayerIndex(playerWhoDiedIndex);
+        int winnerScore = scores[winnerPlayerIndex];
         int loserScore = scores[playerWhoDiedIndex];
-        scoreText.text = string.Format("Player {0} survived with {1} points\nPlayer {2} died :( with {3} points", 
-                                        2 - playerWhoDiedIndex, winnerScore, playerWhoDiedIndex + 1, loserScore);
+        scoreText.text = string.Format("Player {0} survived with {1} points\nPlayer {2} died :( with {3} points",
+                                        Utils.getPlayerNumberFromIndex(winnerPlayerIndex), winnerScore, Utils.getPlayerNumberFromIndex(playerWhoDiedIndex), loserScore);
     }
 
     public void goBackToMainMenuAction() {
-        SceneManager.LoadScene("MainMenuScene");
+        SceneManager.LoadScene(Constants.MAIN_MENU_SCENE_NAME);
     }
 }
