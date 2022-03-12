@@ -1005,6 +1005,7 @@ GameObject:
   - component: {fileID: 800464651}
   - component: {fileID: 800464649}
   - component: {fileID: 800464652}
+  - component: {fileID: 800464653}
   m_Layer: 0
   m_Name: Player1
   m_TagString: P1
@@ -1147,6 +1148,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!95 &800464653
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800464647}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7b651a7913b03144f92c4fb17add1107, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &908018670
 GameObject:
   m_ObjectHideFlags: 0
@@ -1385,12 +1405,12 @@ MonoBehaviour:
   bottlePrefabs:
   - {fileID: 924637499413660188, guid: 7957115dace97024b960fb9c6e277200, type: 3}
   - {fileID: 924637499413660188, guid: 4cbc31d5079b70f4b89412a22a067f27, type: 3}
-  gameOverScreen: {fileID: 512609554}
   bottleControllers:
   - {fileID: 1011143298}
   - {fileID: 210251551}
-  isBombAlive: 0000
   bombPrefab: {fileID: 6423283975795499591, guid: c113f82242e3e944cb47dc33a7c5591b, type: 3}
+  gameOverScreen: {fileID: 512609554}
+  isBombAlive: 0000
 --- !u!1 &1444015264
 GameObject:
   m_ObjectHideFlags: 0
@@ -1666,6 +1686,7 @@ GameObject:
   - component: {fileID: 1932308408}
   - component: {fileID: 1932308407}
   - component: {fileID: 1932308406}
+  - component: {fileID: 1932308410}
   m_Layer: 0
   m_Name: Player2
   m_TagString: P1
@@ -1808,3 +1829,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1932308410
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1932308404}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7b651a7913b03144f92c4fb17add1107, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

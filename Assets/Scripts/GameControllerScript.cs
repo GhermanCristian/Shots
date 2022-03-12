@@ -35,15 +35,11 @@ public sealed class GameControllerScript : MonoBehaviour {
 
     public void playerIsDead(int playerIndex) {
         this.deadPlayerIndex = playerIndex;
-        // TODO - add an animation here
-        Invoke("gameOver", 1f);
+        Invoke("gameOver", 0.833f);
     }
 
-    public void setBombInactive(int playerIndex, bool didKill) {
+    public void setBombInactive(int playerIndex) {
         this.isBombAlive[playerIndex] = false;
-        if (didKill) {
-            this.playerIsDead(Utils.getOtherPlayerIndex(playerIndex));
-        }
     }
 
     public void attemptToFireBomb(int playerIndex) {

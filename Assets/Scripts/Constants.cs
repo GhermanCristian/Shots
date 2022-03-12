@@ -24,6 +24,7 @@ public static class Constants {
     public const float FALLING_BOTTLE_SPEED_MULTIPLIER = 0.01f;
 
     public const string DESTROYED_BOTTLE_ANIMATION_KEY = "isAlive";
+    public const string PLAYER_DEATH_ANIMATION_KEY = "isPlayerAlive";
 
     public const int ROW_COUNT = 3;
     public const int COLUMN_COUNT = 11;

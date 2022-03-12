@@ -96,8 +96,9 @@ public class PlayerScript : MonoBehaviour {
     }
 
     void OnTriggerEnter2D(Collider2D col) {
-        if (col.name.Contains("FallingBottle")) {
+        if (col.name.Contains("FallingBottle") || col.name.Contains("Bomb")) {
             gameController.playerIsDead(this.playerNumber);
+            GetComponent<Animator>().SetBool(Constants.PLAYER_DEATH_ANIMATION_KEY, false);
         }
     }
 }

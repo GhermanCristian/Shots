@@ -34,7 +34,7 @@ public class BottleController : MonoBehaviour {
     }
 
     private Vector3 computePositionForBottle(int row, int column) {
-        return new Vector3(this.position * (column * 0.9f + 1), 2 * row + 1, 0);
+        return new Vector3(this.position * (column * 0.9f + 1), 2 * row + 0.8f, 0);
     }
 
     private bool isLastRowDestroyed() {

@@ -13,7 +13,7 @@ public class BombScript : MonoBehaviour {
 
     private void destroy(bool didKill) {
         Destroy(gameObject);
-        game.setBombInactive(this.playerWhoFiredIt, didKill);
+        game.setBombInactive(this.playerWhoFiredIt);
     }
 
     void Update() {
