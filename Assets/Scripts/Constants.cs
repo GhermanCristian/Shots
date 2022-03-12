@@ -19,9 +19,9 @@ public static class Constants {
     public const float HIGHEST_Y_COORD = 6.1f;
     public const float LOWEST_Y_COORD = -6.1f;
 
-    public const float BULLET_SPEED = 0.05f;
-    public const float BOMB_SPEED = 0.03f;
-    public const float FALLING_BOTTLE_SPEED_MULTIPLIER = 0.01f;
+    public const float BULLET_SPEED = 0.15f;
+    public const float BOMB_SPEED = 0.1f;
+    public const float FALLING_BOTTLE_SPEED_MULTIPLIER = 0.05f;
 
     public const string DESTROYED_BOTTLE_ANIMATION_KEY = "isAlive";
     public const string PLAYER_DEATH_ANIMATION_KEY = "isPlayerAlive";

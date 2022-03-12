@@ -26,4 +26,10 @@ public class MainMenuScript : MonoBehaviour {
     public void player2Ready() {
         this.playerReady(Constants.PLAYER_2_INDEX);
     }
+
+    public void quitGame() {
+        Debug.Log("after quit");
+        Application.Quit();
+        Debug.Log("after quit");
+    }
 }
