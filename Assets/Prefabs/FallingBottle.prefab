@@ -52,7 +52,7 @@ MonoBehaviour:
   points: 0
   isAlive: 0
   BREAKING_ANIMATION_DURATION_SECONDS: 0.5
-  DESCENDING_SPEED: 0.02
+  DESCENDING_SPEED: 0.1
 --- !u!212 &8644399053293338609
 SpriteRenderer:
   m_ObjectHideFlags: 0

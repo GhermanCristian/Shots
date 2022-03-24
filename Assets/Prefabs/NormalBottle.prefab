@@ -53,7 +53,7 @@ MonoBehaviour:
   points: 0
   isAlive: 0
   BREAKING_ANIMATION_DURATION_SECONDS: 0.5
-  DESCENDING_SPEED: 0.02
+  DESCENDING_SPEED: 0.1
 --- !u!70 &2516377646113395541
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ public class BombScript : MonoBehaviour {
         rigidBody = GetComponent<Rigidbody2D>();
     }
 
-    private void destroy(bool didKill) {
+    private void destroy() {
         Destroy(gameObject);
         game.setBombInactive(this.playerWhoFiredIt);
     }
@@ -21,13 +21,13 @@ public class BombScript : MonoBehaviour {
             transform.Translate(0, -Constants.BOMB_SPEED, 0);
         }
         else {
-            this.destroy(false);
+            this.destroy();
         }
     }
 
     void OnTriggerEnter2D(Collider2D col) {
         if (col.name.Contains("Player")) {
-            this.destroy(true);
+            this.destroy();
         }
     }
 }
